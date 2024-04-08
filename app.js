@@ -17,7 +17,7 @@ const sendMessageRouter = express.Router();
 // Middleware para manejar la ruta /sendMessage
 sendMessageRouter.post('/', async (req, res) => {
     try {
-      const { cantidades, direccion, nombre, telefono, vapesNames } = req.body;
+      const { cantidades, direccion, nombre, telefono, vapesNames, total } = req.body;
   
       // Verificar si las cantidades y los vapeIds tienen la misma longitud
       if (cantidades.length !== vapesNames.length) {
@@ -29,7 +29,8 @@ sendMessageRouter.post('/', async (req, res) => {
                           `${vapesNames.map((vapesName, index) => `* ${vapesName}: ${cantidades[index]}`).join('\n')}\n\n` +
                           `Para: ${nombre}\n` +
                           `en la direccion: ${direccion}\n` +
-                          `contacto: ${telefono}`;
+                          `contacto: ${telefono}\n` +
+                          `Total: $${total}`;
   
       // Enviar el mensaje al grupo de Telegram
       await sendTelegramMessage(messageText);
