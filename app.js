@@ -17,16 +17,16 @@ const sendMessageRouter = express.Router();
 // Middleware para manejar la ruta /sendMessage
 sendMessageRouter.post('/', async (req, res) => {
     try {
-      const { cantidades, direccion, nombre, telefono, vapeIds } = req.body;
+      const { cantidades, direccion, nombre, telefono, vapesNames } = req.body;
   
       // Verificar si las cantidades y los vapeIds tienen la misma longitud
-      if (cantidades.length !== vapeIds.length) {
+      if (cantidades.length !== vapesNames.length) {
         throw new Error('La longitud de "cantidades" y "vapeIds" no coincide.');
       }
   
       // Crear el texto del mensaje con los detalles del pedido
       const messageText = `Ha llegado un nuevo pedido:\n \n` +
-                          `${vapeIds.map((vapeId, index) => `* ${vapeId}: ${cantidades[index]}`).join('\n')}\n\n` +
+                          `${vapesNames.map((vapesName, index) => `* ${vapesName}: ${cantidades[index]}`).join('\n')}\n\n` +
                           `Para: ${nombre}\n` +
                           `en la direccion: ${direccion}\n` +
                           `contacto: ${telefono}`;
