@@ -3,7 +3,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
 // Token de tu bot de Telegram
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -18,7 +18,8 @@ const sendMessageRouter = express.Router();
 sendMessageRouter.post('/', async (req, res) => {
     try {
       const { cantidades, direccion, nombre, telefono, vapesNames, total } = req.body;
-  
+      console.log(req.body)
+      
       // Verificar si las cantidades y los vapeIds tienen la misma longitud
       if (cantidades.length !== vapesNames.length) {
         throw new Error('La longitud de "cantidades" y "vapeIds" no coincide.');
